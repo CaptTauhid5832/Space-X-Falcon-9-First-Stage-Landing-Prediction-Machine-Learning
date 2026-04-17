@@ -1,0 +1,18 @@
+All notable changes to this project will be documented in this file.
+
+[1.0.0] - 2026-04-17
+Added
+
+Initial release of the SpaceX Falcon 9 Landing Prediction system.
+
+Data ingestion scripts for SpaceX API and web scraped Wikipedia data.
+
+Exploratory Data Analysis (EDA) notebooks with Seaborn and Matplotlib.
+
+Interactive launch site maps using Folium.
+
+Plotly Dash dashboard for real-time payload and site filtering.
+
+Machine Learning pipeline comparing Logistic Regression, SVM, Decision Tree, and KNN.
+
+Hyperparameter tuning using GridSearchCV.

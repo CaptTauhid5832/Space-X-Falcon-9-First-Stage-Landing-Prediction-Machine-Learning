@@ -8,6 +8,8 @@ Data Collection: Gathering data via the SpaceX API and web scraping.
 
 EDA: Analyzing trends in launch sites, payload mass, and orbits.
 
+
+## Markdown 
 Interactive Mapping: Using Folium to visualize launch sites and landing success rates.
 
 Dashboarding: Creating an interactive Plotly Dash app to filter data by site and payload.

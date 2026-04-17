@@ -1,60 +1,50 @@
 # Space-X-Falcon-9-First-Stage-Landing-Prediction-Machine-Learning
-import pandas as pd
-import numpy as np
-import requests
-import io
-import matplotlib.pyplot as plt
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-import warnings
+This project predicts whether the Falcon 9 first stage will land successfully. This is a critical task because SpaceX saves millions of dollars by reusing the first stage of the rocket.
 
-warnings.filterwarnings("ignore", category=FutureWarning)
+Project Overview
+The goal is to determine the probability of a successful landing using machine learning. The project involves:
 
-# 1. Load Data
-URL1 = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/dataset_part_2.csv'
-URL2 = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/dataset_part_3.csv'
+Data Collection: Gathering data via the SpaceX API and web scraping.
 
-data = pd.read_csv(io.BytesIO(requests.get(URL1).content))
-X = pd.read_csv(io.BytesIO(requests.get(URL2).content))
+EDA: Analyzing trends in launch sites, payload mass, and orbits.
 
-# 2. Preprocessing
-Y = data['Class'].to_numpy()
-transform = preprocessing.StandardScaler()
-X = transform.fit_transform(X)
+Interactive Mapping: Using Folium to visualize launch sites and landing success rates.
 
-# 3. Train/Test Split
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=2)
+Dashboarding: Creating an interactive Plotly Dash app to filter data by site and payload.
 
-# 4. Logistic Regression
-parameters_lr = {'C': [0.01, 0.1, 1], 'penalty': ['l2'], 'solver': ['lbfgs']}
-lr = LogisticRegression()
-logreg_cv = GridSearchCV(lr, parameters_lr, cv=10)
-logreg_cv.fit(X_train, Y_train)
-logreg_score = logreg_cv.score(X_test, Y_test)
+Machine Learning: Training and comparing Logistic Regression, SVM, Decision Tree, and KNN models.
 
-# 5. SVM
-parameters_svm = {'kernel': ('linear', 'rbf', 'poly', 'sigmoid'), 'C': np.logspace(-3, 3, 5), 'gamma': np.logspace(-3, 3, 5)}
-svm = SVC()
-svm_cv = GridSearchCV(svm, parameters_svm, cv=10)
-svm_cv.fit(X_train, Y_train)
-svm_score = svm_cv.score(X_test, Y_test)
+Technologies Used
+Python 3.13
 
-# 6. Decision Tree
-parameters_tree = {'criterion': ['gini', 'entropy'], 'splitter': ['best', 'random'], 'max_depth': [2*n for n in range(1,10)], 
-                   'max_features': ['sqrt', 'log2'], 'min_samples_leaf': [1, 2, 4], 'min_samples_split': [2, 5, 10]}
-tree = DecisionTreeClassifier()
-tree_cv = GridSearchCV(tree, parameters_tree, cv=10)
-tree_cv.fit(X_train, Y_train)
-tree_score = tree_cv.score(X_test, Y_test)
+Pandas & NumPy (Data Manipulation)
 
-# 7. Results Summary
-results = pd.DataFrame({
-    'Method': ['Logistic Regression', 'SVM', 'Decision Tree'],
-    'Test Accuracy': [logreg_score, svm_score, tree_score]
-})
+Seaborn & Matplotlib (Static Visualization)
 
-print(results)
+Folium (Geospatial Mapping)
+
+Plotly Dash (Interactive Dashboard)
+
+Scikit-Learn (Machine Learning & Preprocessing)
+
+Key Findings
+Best Model: Logistic Regression, SVM, and KNN all performed with a test accuracy of approximately 83.3%.
+
+Launch Trends: Success rates have improved significantly over time as SpaceX refined their landing technology.
+
+Payload Impact: Heavier payloads and specific orbits (like GTO) show different success correlations compared to lighter LEO missions.
+
+How to Run
+Clone the repository:
+
+Bash
+git clone https://github.com/yourusername/spacex-predict.git
+Install dependencies:
+
+Bash
+pip install pandas numpy seaborn matplotlib folium plotly dash scikit-learn requests
+Run the Dashboard:
+
+Bash
+python spacex_dash.py
+View the Analysis: Open the Jupyter Notebooks in the notebooks/ folder to see the step-by-step data processing and model training.

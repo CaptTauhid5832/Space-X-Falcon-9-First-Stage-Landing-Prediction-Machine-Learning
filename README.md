@@ -38,7 +38,7 @@ Payload Impact: Heavier payloads and specific orbits (like GTO) show different s
 How to Run
 1. Clone the repository
 Bash
-git clone https://github.com/yourusername/spacex-predict.git
+git clone https://github.com/CaptTauhid5832/spacex-predict.git
 cd spacex-predict
 2. Install dependencies
 Bash

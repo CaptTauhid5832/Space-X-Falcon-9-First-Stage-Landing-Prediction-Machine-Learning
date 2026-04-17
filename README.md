@@ -1,11 +1,9 @@
 # Space-X-Falcon-9-First-Stage-Landing-Prediction-Machine-Learning
-# Comparison of all models
 import pandas as pd
 import numpy as np
 import requests
 import io
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LogisticRegression
@@ -14,7 +12,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 import warnings
 
-# Suppress warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 # 1. Load Data
@@ -48,4 +45,16 @@ svm_score = svm_cv.score(X_test, Y_test)
 
 # 6. Decision Tree
 parameters_tree = {'criterion': ['gini', 'entropy'], 'splitter': ['best', 'random'], 'max_depth': [2*n for n in range(1,10)], 
-                   'max_features': ['sqrt', 'log2'], 'min_samples_leaf': [1, 2, 4], 'min_
+                   'max_features': ['sqrt', 'log2'], 'min_samples_leaf': [1, 2, 4], 'min_samples_split': [2, 5, 10]}
+tree = DecisionTreeClassifier()
+tree_cv = GridSearchCV(tree, parameters_tree, cv=10)
+tree_cv.fit(X_train, Y_train)
+tree_score = tree_cv.score(X_test, Y_test)
+
+# 7. Results Summary
+results = pd.DataFrame({
+    'Method': ['Logistic Regression', 'SVM', 'Decision Tree'],
+    'Test Accuracy': [logreg_score, svm_score, tree_score]
+})
+
+print(results)

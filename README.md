@@ -1,4 +1,5 @@
 # Space-X-Falcon-9-First-Stage-Landing-Prediction-Machine-Learning
+SpaceX Falcon 9 First Stage Landing Prediction
 This project predicts whether the Falcon 9 first stage will land successfully. This is a critical task because SpaceX saves millions of dollars by reusing the first stage of the rocket.
 
 Project Overview
@@ -8,8 +9,6 @@ Data Collection: Gathering data via the SpaceX API and web scraping.
 
 EDA: Analyzing trends in launch sites, payload mass, and orbits.
 
-
-## Markdown 
 Interactive Mapping: Using Folium to visualize launch sites and landing success rates.
 
 Dashboarding: Creating an interactive Plotly Dash app to filter data by site and payload.
@@ -37,16 +36,24 @@ Launch Trends: Success rates have improved significantly over time as SpaceX ref
 Payload Impact: Heavier payloads and specific orbits (like GTO) show different success correlations compared to lighter LEO missions.
 
 How to Run
-Clone the repository:
-
+1. Clone the repository
 Bash
 git clone https://github.com/yourusername/spacex-predict.git
-Install dependencies:
-
+cd spacex-predict
+2. Install dependencies
 Bash
 pip install pandas numpy seaborn matplotlib folium plotly dash scikit-learn requests
-Run the Dashboard:
-
+3. Run the Dashboard
 Bash
 python spacex_dash.py
-View the Analysis: Open the Jupyter Notebooks in the notebooks/ folder to see the step-by-step data processing and model training.
+4. View the Analysis
+Open the Jupyter Notebooks in the notebooks/ folder to see the step-by-step data processing and model training.
+
+File Structure
+spacex_dash.py: The Plotly Dash application.
+
+notebooks/EDA_Visualization.ipynb: Exploratory data analysis using Seaborn.
+
+notebooks/Machine_Learning_Prediction.ipynb: Model training and hyperparameter tuning.
+
+notebooks/Folium_Maps.ipynb: Geographical analysis of launch sites.
